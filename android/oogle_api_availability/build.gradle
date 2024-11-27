@@ -1,0 +1,45 @@
+group 'com.baseflow.googleapiavailability'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace "com.baseflow.googleapiavailability"
+    
+    compileSdkVersion 33
+    
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 33
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
+}

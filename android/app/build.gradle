@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        google() 
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.15' 
+    }
+}
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+    
+}
+
+android {
+    namespace = "com.wallet1.u0.walle1_0"
+
+    
+
+
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId "com.wallet1.u0.walle1_0"
+        minSdk 23
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        debug {
+            // Utilisation du keystore par défaut pour le debug
+        }
+        release {
+            // Configuration temporaire pour éviter l'erreur
+            storeFile file("${System.getenv('HOME')}/.android/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            shrinkResources false // Désactiver la réduction des ressources en mode debug
+            minifyEnabled false   // Désactiver la réduction de code en mode debug
+        }
+        release {
+            signingConfig signingConfigs.release
+            shrinkResources true  // Activer la réduction des ressources inutilisées
+            minifyEnabled true    // Activer la réduction de code pour optimiser l'application
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // Import de la bibliothèque Firebase BoM
+    implementation("com.google.firebase:firebase-bom:33.6.0")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation 'com.google.android.gms:play-services-base:17.6.0'  // Vous avez correctement ajouté cette dépendance
+
+}
+
+// Application du plugin Google Services
+apply plugin: 'com.google.gms.google-services'
